@@ -6,6 +6,7 @@ import type {
   PageObject,
   PageProps,
 } from '../commonTypes';
+import { makeRouterMock } from '../router';
 
 export default function renderApp({
   options,
@@ -25,6 +26,7 @@ export default function renderApp({
   return renderEnhancedApp({
     App: AppComponent,
     Page: PageComponent,
+    pageObject,
     pageProps,
     options,
   });
@@ -33,17 +35,29 @@ export default function renderApp({
 export function renderEnhancedApp({
   App,
   Page,
+  pageObject,
   pageProps,
-  options: { wrapper = {} },
+  options,
 }: {
   App: NextApp;
   Page: NextPage;
+  pageObject: PageObject;
   pageProps: PageProps | undefined;
   options: ExtendedOptions;
 }) {
+  const { wrapper = {} } = options;
+  const appRouter = makeRouterMock({ options, pageObject });
+
   let UserEnhancedPage = Page;
   if (wrapper.Page) {
     UserEnhancedPage = wrapper.Page(Page);
   }
-  return <App Component={UserEnhancedPage} pageProps={pageProps} />;
+
+  return (
+    <App
+      Component={UserEnhancedPage}
+      pageProps={pageProps}
+      router={appRouter}
+    />
+  );
 }

@@ -55,6 +55,7 @@ describe('_app support', () => {
           pageProps={{
             ctx: expectedAppContext,
           }}
+          router={{ asPath: '/app-context' }}
         />
       );
       expectDOMElementsToMatch(actual, expected);
@@ -77,6 +78,7 @@ describe('_app support', () => {
             propNameCollision: 'from-page',
             fromPage: true,
           }}
+          router={{ asPath: route }}
         />
       );
 
@@ -97,6 +99,7 @@ describe('_app support', () => {
               fromCustomApp: true,
               propNameCollision: 'from-app',
             }}
+            router={{ asPath: '/gip' }}
           />
         );
         expectDOMElementsToMatch(actual, expected);

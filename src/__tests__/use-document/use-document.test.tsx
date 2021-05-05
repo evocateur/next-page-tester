@@ -23,7 +23,11 @@ describe('_document support', () => {
 
         actual.removeAttribute('id');
         const { container: expected } = render(
-          <CustomApp Component={CustomDocumentWithGIP_Page} pageProps={{}} />
+          <CustomApp
+            Component={CustomDocumentWithGIP_Page}
+            pageProps={{}}
+            router={{ asPath: '/page' }}
+          />
         );
         expectDOMElementsToMatch(actual, expected);
       });
@@ -66,6 +70,7 @@ describe('_document support', () => {
               <CustomApp
                 Component={CustomDocumentWithGIP_Page}
                 pageProps={{}}
+                router={{ asPath: '/page' }}
               />
             </div>
           </body>

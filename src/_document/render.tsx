@@ -65,7 +65,7 @@ export default async function serverRenderDocument({
     } = pageObject.files.server;
 
     const render = (App: NextApp, Page: NextPage) => {
-      return renderEnhancedApp({ App, Page, options, pageProps });
+      return renderEnhancedApp({ App, Page, options, pageObject, pageProps });
     };
 
     // Return an empty dummy document if useDocument is not enabled
